@@ -1,0 +1,86 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>preview</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+
+    <!-- ✅ تحسينات الأداء والتحسينات -->
+    <TieredCompilation>true</TieredCompilation>
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <Deterministic>true</Deterministic>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- AI & ML -->
+    <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI" Version="0.5.2" />
+    <PackageReference Include="Microsoft.ML" Version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.Tokenizers" Version="0.21.1" />
+
+    <!-- Semantic Kernel -->
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.40.0" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.Onnx" Version="1.40.1-alpha" />
+
+    <!-- Audio Engine -->
+    <PackageReference Include="NAudio" Version="2.2.1" />
+
+    <!-- Security & Identity -->
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.73.1" />
+    <PackageReference Include="Microsoft.Identity.Client.NativeInterop" Version="0.16.2" />
+    <PackageReference Include="Azure.Identity" Version="1.15.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.0.1" />
+
+    <!-- Code Analysis (Roslyn) -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
+
+    <!-- WASM Runtime -->
+    <PackageReference Include="Wasmtime" Version="19.0.0" />
+
+    <!-- UI & Graphics -->
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233" />
+  </ItemGroup>
+
+  <!-- WASM Files Auto-Copy -->
+  <ItemGroup>
+    <None Include="wasm\*.wasm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- Remove Unused Files -->
+  <ItemGroup>
+    <Compile Remove="Models\DiagnosticAnalyzer.cs" />
+    <Compile Remove="Models\CSAnalyzer.cs" />
+    <Compile Remove="Models\CSCodeFix.cs" />
+    <Compile Remove="Models\CSRefactoring.cs" />
+    <Compile Remove="Models\CodeFixProvider.cs" />
+    <Compile Remove="Models\CodeRefactoringProvider.cs" />
+    <Compile Remove="Models\CSHelper.cs" />
+    <Compile Remove="Models\AzureAppConfigStartup.cs" />
+    <Compile Remove="Models\DocumentDBBolt.cs" />
+    <Compile Remove="Models\EventHubsBolt.cs" />
+    <Compile Remove="Models\ModelViewControl.cs" />
+    <Compile Remove="Models\ModelViewControl.Designer.cs" />
+    <Compile Remove="Models\autoexp.cs" />
+  </ItemGroup>
+
+</Project>
